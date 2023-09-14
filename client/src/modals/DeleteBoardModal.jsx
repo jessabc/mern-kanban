@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { Context } from '../Context'
 import { useOnClickOutside } from '../hooks/useOnClickOutside'
 import iconCross from '../assets/icon-cross.svg'
@@ -33,19 +33,30 @@ console.log(currentBoardData)
             "Authorization": `Bearer ${user.token}`
           }
         })
-        console.log(response.data)
-        const filtered = boards.filter(board => board.boardName != response.data.boardName)
-        setBoards(filtered)
-
+        // console.log(response.data)
+        // console.log(boards)
+        // console.log(currentBoardName)
+        // console.log(boards.map(board => board.boardName).indexOf(currentBoardName))
+        const boardsArrLength = boards.length -1
+        // console.log(boardsArrLength)
+        const indexOfDeletedBoard = boards.map(board => board.boardName).indexOf(currentBoardName)
+        // console.log(boards[0].boardName !== currentBoardName)
+        setBoards(prev => prev.filter(board => board.boardName != currentBoardName))
+//         console.log(boards)
+// console.log(boards[0])
         // why if was first wont it delete???
-        setCurrentBoardName(boards[0].boardName)
-        setCurrentBoardData(boards[0])
+        setCurrentBoardName(boards[boardsArrLength === indexOfDeletedBoard ? 0 : indexOfDeletedBoard + 1].boardName)
+        setCurrentBoardData(boards[boardsArrLength === indexOfDeletedBoard ? 0 : indexOfDeletedBoard + 1])
     } catch(error) {
         console.log(error)
     }
 
     setIsDeleteBoardModalVisible(false)
 }
+
+useEffect(() => {
+console.log(boards)
+}, [boards])
 
 
   return (

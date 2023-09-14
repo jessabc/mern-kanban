@@ -18,7 +18,7 @@ export default function Header({isMenuModalVisible, setIsMenuModalVisible}) {
     const [isNewTaskModalVisible, setIsNewTaskModalVisible] = useState()
     const [isEditDeletBoardModalVisible, setIsEditDeletBoardModalVisible] = useState()
 
-    const {boards, currentBoardName, theme} = useContext(Context)
+    const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
 
     console.log(currentBoardName)
    
@@ -43,7 +43,7 @@ export default function Header({isMenuModalVisible, setIsMenuModalVisible}) {
 
                 {/* menu */}   
                 <div 
-                    onClick={() => setIsMenuModalVisible(prev => !prev)} className='flex gap-1 cursor-pointer'>
+                    onClick={() => setIsMenuModalVisible(prev => !prev)} className='flex gap-1 cursor-pointer sm:cursor-default'>
                     {/* current board name on display */}
                     <p className='font-bold text-xl -mb-1 dark:text-zinc-100 sm:font-semibold sm:text-xl sm:-mb-1 sm:dark:text-zinc-100 sm:block'>{currentBoardName}</p>
                     {/* chevron */}

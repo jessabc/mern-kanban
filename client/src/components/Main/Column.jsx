@@ -1,11 +1,11 @@
 import { Droppable } from 'react-beautiful-dnd'
 import { Task } from './Task'
 
-
+ 
 export default function Column({column, index}) {
 
   console.log(column)
-    const taskElements = column.tasks.map((task, index) => <Task key={task.title} task={task} index={index}/>)
+    const taskElements = column.tasks.map((task, index) => <Task key={task.taskName} task={task} index={index}/>)
 
     function circle() {
       if(index % 2 === 0) {

@@ -37,7 +37,7 @@ console.log(task)
             </div>
           )}
         </Draggable>
-
+ 
         {/* Task Modal */}
         <div className={`${isTaskModalVisible ? 'block' : 'hidden'}`}>
             <TaskModal key={task.title}setIsTaskModalVisible={setIsTaskModalVisible} 

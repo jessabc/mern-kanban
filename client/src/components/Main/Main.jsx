@@ -5,19 +5,44 @@ import Column from './Column'
 import NewColumn from './NewColumn'
 import Menu from '../../modals/Menu'
 import './styles.css'
-
+import useAuthContext from '../../hooks/useAuthContext'
+import axios from 'axios';
 
 export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
     
   const [columns, setColumns] = useState([])
 
-  const {boards, setBoards, currentBoardName, currentBoardData, setCurrentBoardData} = useContext(Context)
+  console.log(columns)
+
+  const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
+
+  const {user} = useAuthContext()
 
   const columnElements = currentBoardData?.columns?.map((column, index) => <Column key={column.columnName} column={column} index={index}/>)
 
   useEffect(() => {
     setColumns(currentBoardData?.columns)
   },[currentBoardData])
+
+
+  const updateDatabase = async(updatedBoard) => {
+    try {
+      const response = await axios.put(`http://localhost:4000/api/boards/${currentBoardData._id}`, updatedBoard,  { 
+        headers: { 
+          "Authorization": `Bearer ${user.token}`
+        }
+      })
+      console.log(response.data)
+      
+      // setBoards(prev => prev.map(board => board.boardName === currentBoardName ? response.data : board))
+      // setCurrentBoardName(response.data.boardName)
+      // setCurrentBoardData(response.data)
+  } catch(error) {
+      console.log(error)
+  }
+
+
+}
 
 
   //credit to https://dev.to/imjoshellis/codealong-multi-column-drag-and-drop-in-react-3781
@@ -39,39 +64,51 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
 
     // If start is the same as end, we're in the same column
     if (start === end) {
+      console.log(start)
       // Move the item within the list
       // Start by making a new list without the dragged item
       const newList = start.tasks.filter(
         (_, idx) => idx !== source.index
+
       )
+
+      console.log(newList)
       // Then insert the item at the right location
       newList.splice(destination.index, 0, start.tasks[source.index])
 
       // Then create a new copy of the column object
       const newCol = {
-        id: start.id,
-        name: source.droppableId,
+        _id: start._id,
+        columnName: source.droppableId,
         tasks: newList
       }
+
+      console.log(newCol)
 
       // Update the state
       setColumns(prev => (
         prev.map(column => (
-          column.columnName === newCol.name ? newCol : column
+          column.columnName === newCol.columnName ? newCol : column
         ))
       ))
 
       const updatedColumns = currentBoardData.columns.map(column => column.columnName === source.droppableId ? newCol : column)
 
       const updatedBoard = {...currentBoardData, columns: updatedColumns}
-
+console.log(updatedBoard)
       setCurrentBoardData(updatedBoard)
+console.log(currentBoardName)
+
+updateDatabase(updatedBoard)
+
 
       setBoards(prev => (
         prev.map(board => (
-            board.boardName === currentBoardName ? updatedBoard: board
+            board.boardName === currentBoardName ? updatedBoard : board
         ))
       ))  
+
+      console.log(boards)
 
       return null
 
@@ -84,8 +121,8 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
 
       // Create a new start column
       const newStartCol = {
-        id: start.id,
-        name: source.droppableId,
+        _id: start._id,
+        columnName: source.droppableId,
         tasks: newStartList
       }
 
@@ -98,11 +135,13 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
       const newerEndList = newEndList.map(task => (
         task.status === destination.droppableId ? task: {...task, status: destination.droppableId}
       ))
+
+      console.log(newerEndList)
      
       //Create a new end column
       const newEndCol = {
-        id: end.id,
-        name: destination.droppableId,
+        _id: end._id,
+        columnName: destination.droppableId,
         tasks: newerEndList
       }
 
@@ -112,14 +151,19 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
       updatedColumns = updatedColumns.map(column => column.columnName === destination.droppableId ? newEndCol : column)
 
       const updatedBoard = {...currentBoardData, columns: updatedColumns}
-      
+      console.log(updatedBoard)
       setCurrentBoardData(updatedBoard)
+
+      updateDatabase(updatedBoard)
+
 
       setBoards(prev => (
         prev.map(board => (
           board.boardName === currentBoardName ? updatedBoard: board
         ))
       ))
+
+      console.log(boards)
     
       return null
     }
@@ -131,7 +175,7 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
         
         {/* sticky header credit to https://dev.to/cryptic022/sticky-header-and-footer-with-tailwind-2oik */}
         <div className={`flex gap-5 pl-5 pr-10 flex-1 w-screen bg-gray-200 dark:bg-zinc-900 sm:pl-0 overflow-y-auto h-screen ${isMenuModalVisible ? 'sm:pr-20 sm:pl-60 ':'sm:pr-0 sm:pl-0'}`}>
-        
+         
           <div className='flex flex-col mt-auto'>
             <Menu 
             isMenuModalVisible={isMenuModalVisible}

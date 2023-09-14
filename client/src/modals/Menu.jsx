@@ -76,7 +76,7 @@ export default function Menu({isMenuModalVisible, setIsMenuModalVisible}) {
                         <div className={`${isMenuModalVisible && size.width < 640? 'fixed top-0 left-0 w-screen h-screen bg-opacity-50 flex bg-gray-600 dark:bg-gray-900 dark:bg-opacity-50  items-start justify-center ' : ''}`}>
                         
                             {/* menu dropdown modal*/}
-                            <div className={`${isMenuModalVisible ? 'mt-32  w-3/4  fixed h-content bg-gray-50 shadow-md  pt-5 pb-5 pr-5 rounded-lg  font-semibold text-gray-400 dark:bg-zinc-700 sm:dark:bg-zinc-800 sm:flex sm:flex-col' : 'hidden'}  sm:w-60 sm:top-0 sm:left-0 sm:absolute sm:h-[calc(100vh-7rem)] sm:rounded-none sm:mt-0 sm:pt-0 sm:pb-0`} ref={ref}>
+                            <div className={`${isMenuModalVisible ? 'mt-24  w-3/4  fixed h-content bg-gray-50 shadow-md  pt-5 pb-5 pr-5 rounded-lg  font-semibold text-gray-400 dark:bg-zinc-700 sm:dark:bg-zinc-800 sm:flex sm:flex-col' : 'hidden'}  sm:w-60 sm:top-0 sm:left-0 sm:absolute sm:h-[calc(100vh-7rem)] sm:rounded-none sm:mt-0 sm:pt-0 sm:pb-0`} ref={ref}>
 
                                 {/* nubmer of boards */}
                                 <p className={`pl-5 text-xs tracking-widest mb-4 sm:pt-5 sm:pb-3`}>

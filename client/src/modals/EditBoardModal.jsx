@@ -50,7 +50,7 @@ export default function EditBoardModal({setIsEditBoardModalVisible, isEditBoardM
             })
             console.log(response.data)
             
-            setBoards(prev => prev.map(board => board.boardName === response.data.boardName ? response.data : board))
+            setBoards(prev => prev.map(board => board.boardName === currentBoardName ? response.data : board))
             setCurrentBoardName(response.data.boardName)
             setCurrentBoardData(response.data)
         } catch(error) {

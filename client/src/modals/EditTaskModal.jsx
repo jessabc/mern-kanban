@@ -10,6 +10,8 @@ import axios from 'axios'
 
 export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModalVisible, task, setIsTaskModalVisible}) {
 
+    console.log(task)
+
     const [updatedTaskData, setUpdatedTaskData] = useState()
 
     const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
@@ -26,7 +28,8 @@ export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModa
     })
 
     const subtasksArray = task.subtasks
-
+    console.log(subtasksArray)
+    
     const statusOptionElements = currentBoardData?.columns.map((option, index) => <option  key={index} value={option.columnName}>{option.columnName}</option>)
 
     // react hook form
@@ -85,7 +88,8 @@ export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModa
           })
           console.log(response.data)
           setCurrentBoardData(response.data)
-          setBoards(prev => prev.map(board => board.boardName === response.data.boardName ? response.data : board))
+          setBoards(prev => prev.map(board => board.boardName === currentBoardName ? response.data : board))
+        
       } catch(error) {
           console.log(error)
       }

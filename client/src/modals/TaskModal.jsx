@@ -14,6 +14,8 @@ import useAuthContext from '../hooks/useAuthContext';
 import axios from 'axios';
 
 export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, task, numCompletedSubtasks}) {
+
+  console.log(task)
  
   const [count, setCount] = useState(numCompletedSubtasks);
   const [updatedTaskData, setUpdatedTaskData] = useState()
@@ -21,6 +23,7 @@ export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, ta
   const [isEditDeleteTaskModalVisible, setIsEditDeleteTaskModalVisible] = useState()
 
   const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
+  
 
   const {user} = useAuthContext()
 
@@ -31,7 +34,7 @@ export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, ta
   const ref = useRef()
   useOnClickOutside(ref, () => setIsTaskModalVisible(false))
 
-  const subtasksArray = task.subtasks
+  let subtasksArray = task.subtasks
   console.log(subtasksArray)
 
   // react hook form
@@ -94,7 +97,8 @@ export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, ta
      console.log(response.data)
      // setDisplayBoard(response.data.boardName)
      setCurrentBoardData(response.data)
-     setBoards(prev => prev.map(board => board.boardName === response.data.boardName ? response.data : board))
+     setBoards(prev => prev.map(board => board.boardName === currentBoardName ? response.data : board))
+    //  subtasksArray = task.subtasks
  } catch(error) {
      console.log(error)
  }
@@ -164,7 +168,7 @@ export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, ta
                   {fields.map((subtask, index) => {
                       return (
                           <li 
-                            key={subtask.index} 
+                            key={subtask.id} 
                             className='flex items-center my-3 bg-gray-200 py-2 rounded-lg pl-2'
                           >
                             <input

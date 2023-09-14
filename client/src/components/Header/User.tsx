@@ -13,18 +13,18 @@ const User = () => {
   }
 
   return (
-    <div className=' flex justify-between items-center max-w-6xl ml-auto mt-5 mr-10 dark:bg-zinc-800 dark:text-zinc-100'>
+    <div className=' flex justify-end items-center   mt-5 pr-10 sm:pr-12  dark:bg-zinc-800 dark:text-zinc-100 fixed  w-full'>
    
 
-      {user ? (<div className='  text-sm items-end gap-1 hidden sm:flex'>
-        <p className='font-bold  text-slate-900 dark:bg-zinc-800 dark:text-zinc-100 '>{user.email} </p>
-        <p className='font-bold  text-pink-00  '>|</p>
-        <button onClick={handleClick}className='font-bold  text-slate-900  hover:text-slate-800 dark:bg-zinc-800 dark:text-zinc-100'>Logout</button>
+      {user ? (<div className='  text-sm items-end gap-1 hidden sm:flex '>
+        <p className='font-bold  text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100 '>{user.email} </p>
+        <p className='font-bold  text-zinc-00  '>|</p>
+        <button onClick={handleClick}className='font-bold  text-zinc-900  hover:text-zinc-800 dark:bg-zinc-800 dark:text-zinc-100'>Logout</button>
       </div>) :
       
-      (<nav className=' gap-4 text-sm hidden sm:flex'>
-          <Link to='/login' className='font-bold  text-slate-900 rounded-lg p-3 hover:text-slate-600'>Login</Link>
-          <Link to='/signup' className='font-bold bg-slate-800 text-slate-100 rounded-lg p-3 hover:bg-slate-700'>Sign up</Link>
+      (<nav className=' gap-4 text-sm hidden sm:flex '>
+          <Link to='/login' className='font-bold  text-zinc-900 rounded-lg p-3 hover:text-zinc-600'>Login</Link>
+          <Link to='/signup' className='font-bold bg-zinc-800 text-zinc-100 rounded-lg p-3 hover:bg-zinc-700'>Sign up</Link>
       </nav>)}
 
       <div className='sm:hidden'>

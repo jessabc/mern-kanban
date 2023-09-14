@@ -6,8 +6,6 @@ import iconBoard from '../../assets/icon-board.svg'
 
 export default function BoardLink({board, setIsMenuModalVisible}) {
 
-    console.log(board)
-
     const {boards, currentBoardName, setCurrentBoardName, setCurrentBoardData} = useContext(Context)
 
     const size = useWindowSize();

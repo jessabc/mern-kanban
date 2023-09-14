@@ -41,7 +41,6 @@ export default function EditBoardModal({setIsEditBoardModalVisible, isEditBoardM
     })
 
     const onSubmit = async (data) => {
-        console.log(data)
         try {
             const response = await axios.put(`http://localhost:4000/api/boards/${currentBoardData._id}`, data,  { 
               headers: { 

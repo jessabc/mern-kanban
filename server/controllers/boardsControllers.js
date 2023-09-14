@@ -1,6 +1,5 @@
 import { Boards } from "../models/boardModel.js"
 
-
 // get boards
 // post
 // api/boards
@@ -13,7 +12,6 @@ export const getBoards = async (req, res) => {
     }catch(error){
         res.status(400).json({error: error.message})
     }
-
 }
  
 // create a board
@@ -44,31 +42,23 @@ export const deleteBoard = async (req, res) => {
     }
 }
 
-
-
 // edit a board
 // put
 // api/boards/:id
-//replace board
 export const editBoard = async (req, res) => {
-    // console.log(req.body)
     const id = req.params.id
-    // const boardName = req.body.boardName
     
     try{
-        // const editedBoard = await Boards.findOneAndUpdate({ "_id": id}, {"name": boardName } , {}, { returnDocument: 'after' })
         let editedBoard = await Boards.findById(id)
-
         editedBoard.boardName = req.body.boardName
-
         editedBoard.columns = req.body.columns
-        console.log(editedBoard)
         editedBoard.save()
         res.status(200).json(editedBoard)
     }catch(error){
         res.status(400).json({error: error.message})
     }
 }
+
 
 // -------------------------------------------------
 // TASKS
@@ -79,16 +69,11 @@ export const editBoard = async (req, res) => {
 export const addTask = async (req, res) => {
     const id = req.params.id
     const {taskName, taskDescription, subtasks, status} = req.body
-    // console.log(subtasks)
 
-    // title, desc, subtasks, status
     try{
         // https://stackoverflow.com/questions/39522455/updating-nested-array-mongoose
 
-        // const addTaskToBoard = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": status}, {"$push": {"columns.$.tasks": {taskName, taskDescription, subtasks, status}}}, { returnDocument: 'after' })
-
-         const addTaskToBoard = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": status}, {"$push": {"columns.$.tasks": {taskName, taskDescription, subtasks, status}}}, { returnDocument: 'after' })
-        console.log(addTaskToBoard)
+        const addTaskToBoard = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": status}, {"$push": {"columns.$.tasks": {taskName, taskDescription, subtasks, status}}}, { returnDocument: 'after' })
        
         res.status(200).json(addTaskToBoard)
     }catch(error){
@@ -96,81 +81,64 @@ export const addTask = async (req, res) => {
     }
 }
 
-
-
 // edit a task
-// api/boards/tasks/edit/:id  --- this is the board's id not the task id
-// router.put('/tasks/edit/:id', editTask)
+// api/boards/tasks/edit/:id  -- the board's id 
 
 // https://forum.freecodecamp.org/t/how-to-update-deeply-nested-array-in-mongodb-mongoose/466565/2
 export const editTask = async (req, res) => {
-    console.log(req.body)
     const id = req.params.id
-    // const boardName = req.body.boardName
-//    console.log(req.body)
-//    const editedTaskObj = {...req.body}
-//    delete editedTaskObj.originalStatus
-//    console.log('taskobj', editedTaskObj)
+   
+    if(req.body.status === req.body.originalStatus) {
+        try{
+            let editedTask = await Boards.findOneAndUpdate(
+                {
+                    "_id": id,
+                },
+                { 
+                    $set: { "columns.$[e1].tasks.$[e2]": req.body } },
+                {
+                    arrayFilters: [
+                        { "e1.columnName": req.body.status },
+                        { "e2._id": req.body._id },
+                    ],
+                }
+            );
 
-// same status/column
-if(req.body.status === req.body.originalStatus) {
-    try{
-      let editedTask  = await Boards.findOneAndUpdate(
-        {
-          "_id": id,
-        },
-        { $set: { "columns.$[e1].tasks.$[e2]": req.body } },
-        {
-          arrayFilters: [
-            { "e1.columnName": req.body.status },
-            { "e2._id": req.body._id },
-          ],
-        }
-      );
-
-      const editedBoard = await Boards.findById(id)
-        
-        console.log(editedBoard)  
-
-        res.status(200).json(editedBoard)
-    }catch(error){
-        res.status(400).json({error: error.message})
-    }
-}
-
-// different status/column
-if(req.body.status != req.body.originalStatus) {
-    try{
-        // delete orginal task
-        const deletedTask = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": req.body.originalStatus}, {"$pull": {"columns.$.tasks" : {"_id": req.body._id }}}, { returnDocument: 'after' })
-
-        // add edited task to new column
-        const addTaskToBoard = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": req.body.status}, {"$push": {"columns.$.tasks": {...req.body}}}, { returnDocument: 'after' })
-  
         const editedBoard = await Boards.findById(id)
-          
-          console.log(editedBoard)  
-  
-          res.status(200).json(editedBoard)
-      }catch(error){
-          res.status(400).json({error: error.message})
-      }
-}
+        res.status(200).json(editedBoard)
+        }catch(error){
+            res.status(400).json({error: error.message})
+        }
+    }
+
+    // different status/column
+    if(req.body.status != req.body.originalStatus) {
+        try{
+            // delete orginal task
+            const deletedTask = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": req.body.originalStatus}, {"$pull": {"columns.$.tasks" : {"_id": req.body._id }}}, { returnDocument: 'after' })
+
+            // add edited task to new column
+            const addTaskToBoard = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": req.body.status}, {"$push": {"columns.$.tasks": {...req.body}}}, { returnDocument: 'after' })
+    
+            const editedBoard = await Boards.findById(id)
+            res.status(200).json(editedBoard)
+        }catch(error){
+            res.status(400).json({error: error.message})
+        }
+    }
     
 }
 
 // delete a task
 // put
-// api/boards/tasks/delete/:id --board id
+// api/boards/tasks/delete/:id -- board id
 export const deleteTask = async (req, res) => {
-    console.log(req.body)
     const id = req.params.id
     const colName= req.body.colName
     const taskId = req.body.taskId
 
     try{
         const deletedTask = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": colName}, {"$pull": {"columns.$.tasks" : {"_id": taskId }}}, { returnDocument: 'after' })
-        // console.log(deletedTask)
         res.status(200).json(deletedTask)
     }catch(error){
         res.status(400).json({error: error.message})
@@ -185,7 +153,6 @@ export const deleteTask = async (req, res) => {
 // api/boards/tasks/subtasks/:id -- board id
 export const editSubtask = async (req, res) => {
     const id = req.params.id
-    console.log(req.body)
     
     if(req.body.status === req.body.originalStatus) {
         try{
@@ -202,10 +169,7 @@ export const editSubtask = async (req, res) => {
             }
           );
     
-          const editedBoard = await Boards.findById(id)
-            
-            console.log(editedBoard)  
-    
+            const editedBoard = await Boards.findById(id)
             res.status(200).json(editedBoard)
         }catch(error){
             res.status(400).json({error: error.message})
@@ -213,37 +177,19 @@ export const editSubtask = async (req, res) => {
     }
 
     // different status/column
-if(req.body.status != req.body.originalStatus) {
-    try{
-        // // edit subtask
-        // let editedSubtask  = await Boards.findOneAndUpdate(
-        //     {
-        //       "_id": id,
-        //     },
-        //     { $set: { "columns.$[e1].tasks.$[e2].subtasks": [...req.body.subtasks] } },
-        //     {
-        //       arrayFilters: [
-        //         { "e1.columnName": req.body.status },
-        //         { "e2._id": req.body._id }
-        //       ],
-        //     }
-        //   );
-        
+    if(req.body.status != req.body.originalStatus) {
+        try{
+           
+            // delete orginal task
+            const deletedTask = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": req.body.originalStatus}, {"$pull": {"columns.$.tasks" : {"_id": req.body._id }}}, { returnDocument: 'after' })
 
-        // delete orginal task
-        const deletedTask = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": req.body.originalStatus}, {"$pull": {"columns.$.tasks" : {"_id": req.body._id }}}, { returnDocument: 'after' })
-
-        // add edited task to new column
-        const addTaskToBoard = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": req.body.status}, {"$push": {"columns.$.tasks": {...req.body.task, subtasks: [...req.body.subtasks]}}}, { returnDocument: 'after' })
-  
-        const editedBoard = await Boards.findById(id)
-
-          
-          console.log(editedBoard)  
-  
-          res.status(200).json(editedBoard)
-      }catch(error){
-          res.status(400).json({error: error.message})
-      }
-}
+            // add edited task to new column
+            const addTaskToBoard = await Boards.findOneAndUpdate({ "_id": id, "columns.columnName": req.body.status}, {"$push": {"columns.$.tasks": {...req.body.task, subtasks: [...req.body.subtasks]}}}, { returnDocument: 'after' })
+    
+            const editedBoard = await Boards.findById(id)
+            res.status(200).json(editedBoard)
+        }catch(error){
+            res.status(400).json({error: error.message})
+        }
+    }
 }

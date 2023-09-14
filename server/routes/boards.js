@@ -4,6 +4,7 @@ import { getBoards, createBoard, deleteBoard, addTask, editBoard, editTask, dele
 import { requireAuth } from '../middleware/requireAuth.js'
 
 export const router = express.Router()
+
 // protects the below routes unless user has correct auth 
 router.use(requireAuth)
  
@@ -23,16 +24,13 @@ router.delete('/:id', deleteBoard)
 // api/boards/:id 
 router.put('/:id', editBoard)
 
-
-
 // add a new task
-// api/boards/tasks/add/:id  --- this is the board's id not the task id
+// api/boards/tasks/add/:id  --this is the boards id
 router.put('/tasks/add/:id', addTask)
 
 // edit a task
-// api/boards/tasks/edit/:id  --- this is the board's id not the task id
+// api/boards/tasks/edit/:id  --this is the boards id
 router.put('/tasks/edit/:id', editTask)
-
 
 // delete a  task
 // api/boards/tasks/delete/:id -- this is the boards id

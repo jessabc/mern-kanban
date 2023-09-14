@@ -9,6 +9,7 @@ import useAuthContext from '../hooks/useAuthContext'
 export default function CreateNewBoardModal({isCreateNewBoardModalVisible, setIsCreateNewBoardModalVisible}) {
 
     const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
+
     const {user} = useAuthContext()
 
     const ref = useRef()
@@ -38,27 +39,15 @@ export default function CreateNewBoardModal({isCreateNewBoardModalVisible, setIs
         name: 'columns',
     })
 
-    // reset form when submitted
-    // credit to https://www.react-hook-form.com/api/useform/reset/
-    // useEffect(() => {
-    //     reset({ 
-    //         name: '',
-    //         columns:  [{name: '', tasks:[], id:''}]
-    //     })
-    //   }, [isSubmitSuccessful]);
-
-      const onSubmit = async (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
         try {
             const response = await axios.post('http://localhost:4000/api/boards', data, { 
-              headers: { 
+                headers: { 
                 "Authorization": `Bearer ${user.token}`
-              }
-              })
+                }
+            })
 
-            console.log(response.data)
             setBoards(prev=> [...prev, response.data] )
-            // setBoards([response.data])
             setCurrentBoardName(response.data.boardName)
             setCurrentBoardData(response.data)
         } catch(error) {
@@ -67,7 +56,7 @@ export default function CreateNewBoardModal({isCreateNewBoardModalVisible, setIs
 
         setIsCreateNewBoardModalVisible(false)
         reset()
-      }
+    }
 
 
     return (

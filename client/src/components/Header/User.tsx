@@ -6,6 +6,7 @@ import Dropdown from './Dropdown'
 
 const User = () => {
   const {user} = useAuthContext()
+
   const logout = useLogout()
 
   const handleClick = () => {
@@ -15,7 +16,6 @@ const User = () => {
   return (
     <div className=' flex justify-end items-center   mt-5 pr-10 sm:pr-12  dark:bg-zinc-800 dark:text-zinc-100 fixed  w-full'>
    
-
       {user ? (<div className='  text-sm items-end gap-1 hidden sm:flex '>
         <p className='font-bold  text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100 '>{user.email} </p>
         <p className='font-bold  text-zinc-00  '>|</p>

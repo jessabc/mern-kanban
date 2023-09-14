@@ -14,12 +14,8 @@ import iconShowSidbar from '../assets/icon-show-sidebar.svg'
 export default function Menu({isMenuModalVisible, setIsMenuModalVisible}) { 
 
     const [isCreateNewBoardModalVisible, setIsCreateNewBoardModalVisible] = useState()
-
-
  
     const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
-
-    console.log(boards)
     
     const size = useWindowSize();
 
@@ -29,8 +25,6 @@ export default function Menu({isMenuModalVisible, setIsMenuModalVisible}) {
              setIsMenuModalVisible(false)
         }
     }) 
-
-   
 
     const boardLinks = boards?.map((board, index) => 
     <BoardLink 

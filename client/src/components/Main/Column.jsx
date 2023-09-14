@@ -4,7 +4,6 @@ import { Task } from './Task'
  
 export default function Column({column, index}) {
 
-  console.log(column)
     const taskElements = column.tasks.map((task, index) => <Task key={task.taskName} task={task} index={index}/>)
 
     function circle() {

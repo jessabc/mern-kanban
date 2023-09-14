@@ -19,8 +19,6 @@ export default function Header({isMenuModalVisible, setIsMenuModalVisible}) {
     const [isEditDeletBoardModalVisible, setIsEditDeletBoardModalVisible] = useState()
 
     const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
-
-    console.log(currentBoardName)
    
     const size = useWindowSize();
 

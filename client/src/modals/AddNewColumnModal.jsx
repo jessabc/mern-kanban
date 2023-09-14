@@ -40,41 +40,20 @@ export default function AddNewColumnModal({isAddNewColumnModalVisible, setIsAddN
         name: 'columns',
     })
 
-
-    // function onSubmit(data) {      
-    //     // add id to data
-    //     const updatedBoardData = {...data, id: currentBoardData.id}
-    
-    //     // replace old board data with updated
-    //     setBoards(prev => {
-    //         return prev.map(board => {
-    //             return board.name === currentBoardName ? updatedBoardData : board
-    //         })
-    //     })
-
-    //     // update currentboard name
-    //     setCurrentBoardName(updatedBoardData.name)
-        
-    //     // close modal
-    //     setIsAddNewColumnModalVisible(false)
-    // }
-
     const onSubmit = async (data) => {
         try {
             const response = await axios.put(`http://localhost:4000/api/boards/${currentBoardData._id}`, data,  { 
               headers: { 
                 "Authorization": `Bearer ${user.token}`
               }
-            })
-            // setCurrentBoardName(response.data.boardName)
+        })
             setCurrentBoardData(response.data)
-     setBoards(prev => prev.map(board => board.boardName === response.data.boardName ? response.data : board))
+            setBoards(prev => prev.map(board => board.boardName === response.data.boardName ? response.data : board))
         } catch(error) {
             console.log(error)
         }
     
-                setIsAddNewColumnModalVisible(false)
-
+            setIsAddNewColumnModalVisible(false)
       }
 
 

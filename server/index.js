@@ -5,12 +5,7 @@ import cors from 'cors'
 import {router as boardsRoutes} from './routes/boards.js'
 import { router as userRoutes } from './routes/user.js'
 
-
-
 const app = express()
-
-// middleware 
-// app.use(express.static('public'))
 
 const corsOptions = {
     origin: "http://localhost:5173"
@@ -23,7 +18,6 @@ app.use(express.urlencoded({
     extended: true,
     })
    );
-
 
 // routes
 app.use('/api/boards', boardsRoutes)

@@ -11,10 +11,10 @@ import React from 'react'
 function Home() {
  
   const [isMenuModalVisible, setIsMenuModalVisible] = useState(false)
+
   const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
 
   const {user} = useAuthContext()
-  console.log(user)
 
   useEffect(() => {
 
@@ -25,7 +25,6 @@ function Home() {
             "Authorization": `Bearer ${user.token}`
           }
         })
-        console.log(response.data)
         setBoards(response.data)
         setCurrentBoardName(response.data[0].boardName)
         setCurrentBoardData(response.data[0])

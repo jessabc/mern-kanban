@@ -15,16 +15,10 @@ export default function DeleteTaskModal({isDeleteTaskModalVisible, setIsDeleteTa
     })
 
     const {user} = useAuthContext()
-    const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
-    const [deleteTask] = useDeleteTask()
 
-    // function  handleClick(e, task) {
-    //     if(e.target.id === 'delete') {
-    //         deleteTask(task)     
-    //     }
-    //     setIsDeleteTaskModalVisible(false)
-    //     setIsTaskModalVisible(false)
-    // } 
+    const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
+
+    const [deleteTask] = useDeleteTask()
 
     const handleClick = async(e) => {
         e.preventDefault()
@@ -34,7 +28,6 @@ export default function DeleteTaskModal({isDeleteTaskModalVisible, setIsDeleteTa
                 "Authorization": `Bearer ${user.token}`
               }
             })
-            console.log(response.data)
             setCurrentBoardData(response.data)
             setBoards(prev => prev.map(board => board.boardName === response.data.boardName ? response.data : board))
         } catch(error) {

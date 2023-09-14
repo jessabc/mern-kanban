@@ -11,16 +11,13 @@ import axios from 'axios'
 
 export default function AddNewTaskModal({setIsNewTaskModalVisible, isNewTaskModalVisible}) {
   
-  const [newTask, setNewTask] = useState({})
+  // const [newTask, setNewTask] = useState({})
   
   const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
-  console.log(boards)
 
   const {user} = useAuthContext()
 
   const [statusOptionElements] = useStatusOptions()
-
-  // const statusOptionElements = currentBoardData?.columns?.map(column => <option key={column.columnName} value={column.columnName}>{column.columnName}</option>)
 
   const size = useWindowSize()
 
@@ -68,14 +65,12 @@ export default function AddNewTaskModal({setIsNewTaskModalVisible, isNewTaskModa
     // }, [isSubmitSuccessful])
 
     const onSubmit = async (data) => {
-      console.log(data)
       try {
           const response = await axios.put(`http://localhost:4000/api/boards/tasks/add/${currentBoardData._id}`, {...data, status: data.status ? data.status : currentBoardData.columns[0].columnName  }, { 
             headers: { 
               "Authorization": `Bearer ${user.token}`
             }
           })
-          console.log(response.data)
           setCurrentBoardData(response.data)
           setBoards(prev => prev.map(board => board.boardName === response.data.boardName ? response.data : board))
       } catch(error) {
@@ -85,8 +80,6 @@ export default function AddNewTaskModal({setIsNewTaskModalVisible, isNewTaskModa
       setIsNewTaskModalVisible(false)
       reset()
     }
-
-    
 
        
     return (

@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import TaskModal from '../../modals/TaskModal'
 
 export function Task({task, index}) {
-console.log(task)
+
     const [isTaskModalVisible, setIsTaskModalVisible] = useState(false)
 
     const numCompletedSubtasks = getNumCompletedSubtasks()

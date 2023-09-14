@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Context } from '../Context'
 import EditOrDeleteTaskModal from './EditOrDeleteTaskModal' 
@@ -14,28 +14,24 @@ import useAuthContext from '../hooks/useAuthContext';
 import axios from 'axios';
 
 export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, task, numCompletedSubtasks}) {
-
-  console.log(task)
  
   const [count, setCount] = useState(numCompletedSubtasks);
-  const [updatedTaskData, setUpdatedTaskData] = useState()
+  // const [updatedTaskData, setUpdatedTaskData] = useState()
   const [isEditTaskModalVisible, setIsEditTaskModalVisible] = useState(false)
   const [isEditDeleteTaskModalVisible, setIsEditDeleteTaskModalVisible] = useState()
 
   const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
   
-
   const {user} = useAuthContext()
 
   const [statusOptionElements] = useStatusOptions()
-  const [editTask] = useEditTask(task)
-  const [deleteTask] = useDeleteTask(task)
+  // const [editTask] = useEditTask(task)
+  // const [deleteTask] = useDeleteTask(task)
 
   const ref = useRef()
   useOnClickOutside(ref, () => setIsTaskModalVisible(false))
 
   let subtasksArray = task.subtasks
-  console.log(subtasksArray)
 
   // react hook form
   // credit to https://react-hook-form.com/api/usefieldarray/
@@ -52,60 +48,25 @@ export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, ta
   }) 
   const {
     fields,
-    append,
-    remove,
   } = useFieldArray({
     control,
     name: 'subtasks',
   })
 
-  // function onSubmit(data)  {
-  //   // update subtasks array with un/completed subtasks
-  //   const updatedSubtasksArray = task.subtasks.map(subtask => 
-  //     ( {...subtask, isCompleted: data.subtasks[subtask.title] }
-  //     ))
-    
-  //   // update task with the updated subtasks array
-  //   setUpdatedTaskData({...task, status:data.status, subtasks: updatedSubtasksArray}) 
-
-  //   // close modal
-  //   setIsTaskModalVisible(false)
-  // }
-
-  // // fires when updatedTaskData state changes (above function)
-  // useEffect(() => {
-  //   editTask(task, updatedTaskData)
-  // },[updatedTaskData])
- 
-  // // fires when boards state changes
-  // useEffect(() => {
-  //   if(task && updatedTaskData) {
-  //     // if task has changed column/status, then delete task from old column
-  //   if(task?.status != updatedTaskData?.status) {
-  //       deleteTask(task)
-  //   }}
-  // }, [boards])
-
   const onSubmit = async (data)  => {
-    console.log(data)
     try {
      const response = await axios.put(`http://localhost:4000/api/boards/tasks/subtasks/${currentBoardData._id}`, {...data, _id: task._id, originalStatus: task.status, task}, { 
        headers: { 
          "Authorization": `Bearer ${user.token}`
        }
-     })
-     console.log(response.data)
-     // setDisplayBoard(response.data.boardName)
+    })
      setCurrentBoardData(response.data)
      setBoards(prev => prev.map(board => board.boardName === currentBoardName ? response.data : board))
-    //  subtasksArray = task.subtasks
- } catch(error) {
-     console.log(error)
- }
- 
- 
- setIsTaskModalVisible(false)
-   }
+    } catch(error) {
+        console.log(error)
+    }
+    setIsTaskModalVisible(false)
+  }
 
   function handleChange(e) {
     e.target.nextSibling.classList.toggle('line-through')
@@ -120,7 +81,6 @@ export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, ta
     setIsTaskModalVisible(false)
     setCount(numCompletedSubtasks)
   }
-
 
     return (
       <>

@@ -12,8 +12,6 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
     
   const [columns, setColumns] = useState([])
 
-  console.log(columns)
-
   const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
 
   const {user} = useAuthContext()
@@ -32,15 +30,10 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
           "Authorization": `Bearer ${user.token}`
         }
       })
-      console.log(response.data)
-      
-      // setBoards(prev => prev.map(board => board.boardName === currentBoardName ? response.data : board))
-      // setCurrentBoardName(response.data.boardName)
-      // setCurrentBoardData(response.data)
+
   } catch(error) {
       console.log(error)
   }
-
 
 }
 
@@ -72,7 +65,6 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
 
       )
 
-      console.log(newList)
       // Then insert the item at the right location
       newList.splice(destination.index, 0, start.tasks[source.index])
 
@@ -82,8 +74,6 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
         columnName: source.droppableId,
         tasks: newList
       }
-
-      console.log(newCol)
 
       // Update the state
       setColumns(prev => (
@@ -95,20 +85,16 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
       const updatedColumns = currentBoardData.columns.map(column => column.columnName === source.droppableId ? newCol : column)
 
       const updatedBoard = {...currentBoardData, columns: updatedColumns}
-console.log(updatedBoard)
+
       setCurrentBoardData(updatedBoard)
-console.log(currentBoardName)
 
-updateDatabase(updatedBoard)
-
+      updateDatabase(updatedBoard)
 
       setBoards(prev => (
         prev.map(board => (
             board.boardName === currentBoardName ? updatedBoard : board
         ))
       ))  
-
-      console.log(boards)
 
       return null
 
@@ -135,8 +121,6 @@ updateDatabase(updatedBoard)
       const newerEndList = newEndList.map(task => (
         task.status === destination.droppableId ? task: {...task, status: destination.droppableId}
       ))
-
-      console.log(newerEndList)
      
       //Create a new end column
       const newEndCol = {
@@ -151,19 +135,16 @@ updateDatabase(updatedBoard)
       updatedColumns = updatedColumns.map(column => column.columnName === destination.droppableId ? newEndCol : column)
 
       const updatedBoard = {...currentBoardData, columns: updatedColumns}
-      console.log(updatedBoard)
+
       setCurrentBoardData(updatedBoard)
 
       updateDatabase(updatedBoard)
-
 
       setBoards(prev => (
         prev.map(board => (
           board.boardName === currentBoardName ? updatedBoard: board
         ))
       ))
-
-      console.log(boards)
     
       return null
     }

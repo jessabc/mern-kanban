@@ -8,43 +8,22 @@ import axios from 'axios'
 export default function DeleteBoardModal({isDeleteBoardModalVisible, setIsDeleteBoardModalVisible}) {
 
   const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
-console.log(currentBoardData)
+
   const {user} = useAuthContext()
 
   const ref = useRef()
   useOnClickOutside(ref, () => setIsDeleteBoardModalVisible(false));
-   console.log(currentBoardName)
-
-  // function deleteBoard() {
-  //   // sets new boards array removing current board
-  //   setBoards(prev => prev.filter(board => board.name != currentBoardName)) 
-  //   // closes modal
-  //   setIsDeleteBoardModalVisible(false)
-
-  //   setCurrentBoardName(null) 
-  // }
     
-
   const deleteBoard = async() => {
-    
     try {
         const response = await axios.delete(`http://localhost:4000/api/boards/${currentBoardData._id} `,  { 
           headers: { 
             "Authorization": `Bearer ${user.token}`
           }
         })
-        // console.log(response.data)
-        // console.log(boards)
-        // console.log(currentBoardName)
-        // console.log(boards.map(board => board.boardName).indexOf(currentBoardName))
         const boardsArrLength = boards.length -1
-        // console.log(boardsArrLength)
         const indexOfDeletedBoard = boards.map(board => board.boardName).indexOf(currentBoardName)
-        // console.log(boards[0].boardName !== currentBoardName)
         setBoards(prev => prev.filter(board => board.boardName != currentBoardName))
-//         console.log(boards)
-// console.log(boards[0])
-        // why if was first wont it delete???
         setCurrentBoardName(boards[boardsArrLength === indexOfDeletedBoard ? 0 : indexOfDeletedBoard + 1].boardName)
         setCurrentBoardData(boards[boardsArrLength === indexOfDeletedBoard ? 0 : indexOfDeletedBoard + 1])
     } catch(error) {
@@ -52,11 +31,7 @@ console.log(currentBoardData)
     }
 
     setIsDeleteBoardModalVisible(false)
-}
-
-useEffect(() => {
-console.log(boards)
-}, [boards])
+  }
 
 
   return (

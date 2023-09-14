@@ -10,16 +10,14 @@ import axios from 'axios'
 
 export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModalVisible, task, setIsTaskModalVisible}) {
 
-    console.log(task)
-
-    const [updatedTaskData, setUpdatedTaskData] = useState()
+    // const [updatedTaskData, setUpdatedTaskData] = useState()
 
     const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
 
     const {user} = useAuthContext()
     
-    const [editTask] = useEditTask(task)
-    const [deleteTask] = useDeleteTask(task)
+    // const [editTask] = useEditTask(task)
+    // const [deleteTask] = useDeleteTask(task)
 
     const ref = useRef()
     useOnClickOutside(ref, () => {
@@ -28,7 +26,6 @@ export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModa
     })
 
     const subtasksArray = task.subtasks
-    console.log(subtasksArray)
     
     const statusOptionElements = currentBoardData?.columns.map((option, index) => <option  key={index} value={option.columnName}>{option.columnName}</option>)
 
@@ -55,38 +52,13 @@ export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModa
         name: 'subtasks',
     })
 
-    // function onSubmit(data) {
-    //     //save form data to updatedTaskData state, and add id
-    //     setUpdatedTaskData ({...data, id: task.id, statusId: task.statusId })      
-    // }
-    
-    // // fires when updatedTaskData state changes (above function)
-    // useEffect(() => {
-    //     editTask(task, updatedTaskData)
-    // },[updatedTaskData])
-
-    // // fires when boards state changes
-    // useEffect(() => {
-    //     if(task && updatedTaskData) {
-    //         // if task has changed column/status, then delete task from old column
-    //         if(task?.status != updatedTaskData?.status) {
-    //             deleteTask(task)
-    //         } else {
-    //             setIsEditTaskModalVisible(false)
-    //             setIsTaskModalVisible(false)
-    //         }
-    //     } 
-    // }, [boards])
-
     const onSubmit = async (data) => {  
-        console.log(data)  
         try {
           const response = await axios.put(`http://localhost:4000/api/boards/tasks/edit/${currentBoardData._id}`, {...data, _id: task._id, originalStatus: task.status}, { 
             headers: { 
               "Authorization": `Bearer ${user.token}`
             }
           })
-          console.log(response.data)
           setCurrentBoardData(response.data)
           setBoards(prev => prev.map(board => board.boardName === currentBoardName ? response.data : board))
         

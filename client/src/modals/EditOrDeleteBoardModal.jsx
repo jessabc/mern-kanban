@@ -6,6 +6,7 @@ import { useOnClickOutside } from '../hooks/useOnClickOutside'
 export default function EditOrDeleteBoardModal({isEditDeletBoardModalVisible, setIsEditDeletBoardModalVisible}) {
  
     const [isEditBoardModalVisible, setIsEditBoardModalVisible] = useState()
+    
     const [isDeleteBoardModalVisible, setIsDeleteBoardModalVisible] = useState()
 
     const ref = useRef()

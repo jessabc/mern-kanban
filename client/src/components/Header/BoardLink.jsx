@@ -19,11 +19,6 @@ export default function BoardLink({board, setIsMenuModalVisible}) {
         
         setCurrentBoardData(board)
     }
-
-    // when board name is clicked, function above sets that board name to disaplay, and the use effect updates the board data to display
-//     useEffect(() => {
-//         setCurrentBoardData(boards.filter(board => board.name === currentBoardName)[0])
-//    },[currentBoardName])
    
     return (
         <div 

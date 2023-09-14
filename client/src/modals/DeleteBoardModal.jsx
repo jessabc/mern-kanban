@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useRef } from 'react'
 import { Context } from '../Context'
 import { useOnClickOutside } from '../hooks/useOnClickOutside'
 import iconCross from '../assets/icon-cross.svg'

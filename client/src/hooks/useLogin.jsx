@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
-import useAuthContext from '../hooks/useAuthContext'
+import useAuthContext from './useAuthContext'
 
 const useLogin = () => {
     const [loading, setLoading] = useState(false)

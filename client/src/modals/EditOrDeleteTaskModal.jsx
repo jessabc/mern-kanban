@@ -9,7 +9,6 @@ export default function EditOrDeleteTaskModal({task, isEditDeleteTaskModalVisibl
 
   const ref = useRef()
   useOnClickOutside(ref, () => {setIsEditDeleteTaskModalVisible(false)
-   
   })
 
   function handleClick(e) {

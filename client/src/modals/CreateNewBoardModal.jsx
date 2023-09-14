@@ -1,10 +1,10 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useRef } from 'react'
 import { Context } from '../Context'
 import { useForm, useFieldArray } from 'react-hook-form';
 import { useOnClickOutside } from '../hooks/useOnClickOutside'
 import iconCross from '../assets/icon-cross.svg'
 import axios from 'axios'
-import useAuthContext from '../hooks/useAuthContext'
+import useAuthContext from '../hooks/useAuthContext';
  
 export default function CreateNewBoardModal({isCreateNewBoardModalVisible, setIsCreateNewBoardModalVisible}) {
 

@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext, useRef } from 'react'
 import {Context} from '../Context'
 import { useForm, useFieldArray } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 import { useStatusOptions } from '../hooks/useStatusOptions';
 import { useOnClickOutside } from '../hooks/useOnClickOutside'
 import { useWindowSize } from '../hooks/useWindowSize'  
@@ -10,8 +9,6 @@ import useAuthContext from '../hooks/useAuthContext';
 import axios from 'axios'
 
 export default function AddNewTaskModal({setIsNewTaskModalVisible, isNewTaskModalVisible}) {
-  
-  // const [newTask, setNewTask] = useState({})
   
   const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
 
@@ -53,16 +50,6 @@ export default function AddNewTaskModal({setIsNewTaskModalVisible, isNewTaskModa
       control,
       name: 'subtasks',
     })
-
-    // reset form when submitted
-    // credit to https://www.react-hook-form.com/api/useform/reset/
-    // useEffect(() => {
-    //   reset({
-    //     title: '',
-    //     description: '',
-    //     subtasks: [{title: '', isCompleted: false}],
-    //   })
-    // }, [isSubmitSuccessful])
 
     const onSubmit = async (data) => {
       try {

@@ -4,8 +4,6 @@ import { Context } from '../Context'
 import EditOrDeleteTaskModal from './EditOrDeleteTaskModal' 
 import EditTaskModal from './EditTaskModal'
 import { useStatusOptions } from '../hooks/useStatusOptions';
-import { useDeleteTask } from '../hooks/useDeleteTask';
-import { useEditTask} from '../hooks/useEditTask'
 import { useOnClickOutside } from '../hooks/useOnClickOutside'
 import iconCross from '../assets/icon-cross.svg'
 import iconCheck from '../assets/icon-check.svg'
@@ -16,8 +14,9 @@ import axios from 'axios';
 export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, task, numCompletedSubtasks}) {
  
   const [count, setCount] = useState(numCompletedSubtasks);
-  // const [updatedTaskData, setUpdatedTaskData] = useState()
+  
   const [isEditTaskModalVisible, setIsEditTaskModalVisible] = useState(false)
+
   const [isEditDeleteTaskModalVisible, setIsEditDeleteTaskModalVisible] = useState()
 
   const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
@@ -25,8 +24,6 @@ export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, ta
   const {user} = useAuthContext()
 
   const [statusOptionElements] = useStatusOptions()
-  // const [editTask] = useEditTask(task)
-  // const [deleteTask] = useDeleteTask(task)
 
   const ref = useRef()
   useOnClickOutside(ref, () => setIsTaskModalVisible(false))

@@ -1,7 +1,5 @@
-
 import Header from '../components/Header/Header'
 import Main from '../components/Main/Main'
-import { ContextProvider } from '../Context'
 import { useEffect, useState, useContext } from 'react'
 import { Context } from '../Context'
 import useAuthContext from '../hooks/useAuthContext'

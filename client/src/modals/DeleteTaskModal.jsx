@@ -1,5 +1,4 @@
 import { useRef, useContext } from 'react'
-import { useDeleteTask } from '../hooks/useDeleteTask'
 import { useOnClickOutside } from '../hooks/useOnClickOutside'
 import iconCross from '../assets/icon-cross.svg'
 import axios from 'axios'
@@ -17,8 +16,6 @@ export default function DeleteTaskModal({isDeleteTaskModalVisible, setIsDeleteTa
     const {user} = useAuthContext()
 
     const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
-
-    const [deleteTask] = useDeleteTask()
 
     const handleClick = async(e) => {
         e.preventDefault()

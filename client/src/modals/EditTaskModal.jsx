@@ -1,8 +1,6 @@
-import { useState, useContext, useEffect, useRef } from 'react'
+import { useContext, useRef } from 'react'
 import { Context } from '../Context'
 import { useForm, useFieldArray } from 'react-hook-form';
-import { useDeleteTask } from '../hooks/useDeleteTask';
-import { useEditTask} from '../hooks/useEditTask'
 import { useOnClickOutside } from '../hooks/useOnClickOutside'
 import iconCross from '../assets/icon-cross.svg'
 import useAuthContext from '../hooks/useAuthContext';
@@ -10,14 +8,9 @@ import axios from 'axios'
 
 export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModalVisible, task, setIsTaskModalVisible}) {
 
-    // const [updatedTaskData, setUpdatedTaskData] = useState()
-
     const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
 
     const {user} = useAuthContext()
-    
-    // const [editTask] = useEditTask(task)
-    // const [deleteTask] = useDeleteTask(task)
 
     const ref = useRef()
     useOnClickOutside(ref, () => {
@@ -61,10 +54,9 @@ export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModa
           })
           setCurrentBoardData(response.data)
           setBoards(prev => prev.map(board => board.boardName === currentBoardName ? response.data : board))
-        
-      } catch(error) {
-          console.log(error)
-      }
+        } catch(error) {
+            console.log(error)
+        }
     
       setIsEditTaskModalVisible(false)
       setIsTaskModalVisible(false)

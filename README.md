@@ -1,6 +1,12 @@
 # Frontend Mentor - Kanban task management web app solution
 
-This is a solution to the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Kanban task management web app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/kanban-task-management-web-app-wgQLt-HlbB). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+
+This is the second version of this app. The first version was a frontend app, this version is a MERN app.
+
+First Version (frontend only) Links:
+- Solution URL: [Github](https://github.com/jessabc/kanban-task-management)
+- Live Site URL: [Kanban Task Management](https://kanbantaskmanagement.netlify.app)
 
 ## Table of contents
 
@@ -35,8 +41,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Github](https://github.com/jessabc/kanban-task-management)
-- Live Site URL: [Kanban Task Management](https://kanbantaskmanagement.netlify.app)
+- Solution URL: [Github](https://github.com/jessabc/mern-kanban)
+- Live Site URL: [Kanban Task Management](https://mern-kanban.onrender.com)
 
 
 ## My process
@@ -49,7 +55,9 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - React Hook Form
 - React Beautiful DND
-- local storage
+- MongoDb / Mongoose
+- Express
+- Node.js
 
 
 ### What I learned
@@ -57,7 +65,8 @@ Users should be able to:
 - Using React Hook Form, and React Beautiful DND
 - Custom hooks
 - Clicking outside modal to close the modal
-- Clide animation for menu
+- Slide animation for menu
+- MERN
 
 ### Continued development
 
@@ -77,6 +86,11 @@ Users should be able to:
 - [Reset checkboxes if close modal without submitting form ](https://codesandbox.io/s/react-hook-form-reset-v7-r7m5s)
 - [Sliding menu](https://dev.to/fayaz/making-a-navigation-drawer-sliding-sidebar-with-tailwindcss-blueprint-581l)
 - [Overlay](https://stackoverflow.com/questions/45607982/how-to-disable-background-when-modal-window-pops-up)
+
+- [MERN stack tutorial](https://www.youtube.com/watch?v=98BzS5Oz5E4&list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE&pp=iAQB)
+- [MERN Auth tutorial](https://www.youtube.com/watch?v=WsRBmwNkv3Q&list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT&pp=iAQB)
+- [How to deploy Mern application on Render](https://dev.to/jolenechong/how-to-deploy-mern-application-on-rendercom-a-heroku-alternative-kim) 
+- [How to setup and deploy a mern stack project](https://dev.to/kunalukey/how-to-setup-and-deploy-a-mern-stack-project-for-free-5acl )
 
 
 ## Acknowledgments

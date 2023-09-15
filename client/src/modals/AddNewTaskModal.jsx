@@ -53,7 +53,7 @@ export default function AddNewTaskModal({setIsNewTaskModalVisible, isNewTaskModa
 
     const onSubmit = async (data) => {
       try {
-          const response = await axios.put(`http://localhost:4000/api/boards/tasks/add/${currentBoardData._id}`, {...data, status: data.status ? data.status : currentBoardData.columns[0].columnName  }, { 
+          const response = await axios.put(`https://mern-kanban-backend.onrender.com/api/boards/tasks/add/${currentBoardData._id}`, {...data, status: data.status ? data.status : currentBoardData.columns[0].columnName  }, { 
             headers: { 
               "Authorization": `Bearer ${user.token}`
             }

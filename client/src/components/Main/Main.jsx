@@ -25,7 +25,7 @@ export default function Main({isMenuModalVisible, setIsMenuModalVisible}) {
 
   const updateDatabase = async(updatedBoard) => {
     try {
-      const response = await axios.put(`http://localhost:4000/api/boards/${currentBoardData._id}`, updatedBoard,  { 
+      const response = await axios.put(`https://mern-kanban-backend.onrender.com/api/boards/${currentBoardData._id}`, updatedBoard,  { 
         headers: { 
           "Authorization": `Bearer ${user.token}`
         }

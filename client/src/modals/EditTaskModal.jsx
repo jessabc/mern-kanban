@@ -47,7 +47,7 @@ export default function EditTaskModal({isEditTaskModalVisible, setIsEditTaskModa
 
     const onSubmit = async (data) => {  
         try {
-          const response = await axios.put(`http://localhost:4000/api/boards/tasks/edit/${currentBoardData._id}`, {...data, _id: task._id, originalStatus: task.status}, { 
+          const response = await axios.put(`https://mern-kanban-backend.onrender.com/api/boards/tasks/edit/${currentBoardData._id}`, {...data, _id: task._id, originalStatus: task.status}, { 
             headers: { 
               "Authorization": `Bearer ${user.token}`
             }

@@ -41,7 +41,7 @@ export default function CreateNewBoardModal({isCreateNewBoardModalVisible, setIs
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:4000/api/boards', data, { 
+            const response = await axios.post('https://mern-kanban-backend.onrender.com/api/boards', data, { 
                 headers: { 
                 "Authorization": `Bearer ${user.token}`
                 }

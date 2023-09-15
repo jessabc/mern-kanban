@@ -20,7 +20,7 @@ export default function DeleteTaskModal({isDeleteTaskModalVisible, setIsDeleteTa
     const handleClick = async(e) => {
         e.preventDefault()
         try {
-            const response = await axios.put(`http://localhost:4000/api/boards/tasks/delete/${currentBoardData._id}`, {colName: task.status, taskId: task._id}, { 
+            const response = await axios.put(`https://mern-kanban-backend.onrender.com/api/boards/tasks/delete/${currentBoardData._id}`, {colName: task.status, taskId: task._id}, { 
               headers: { 
                 "Authorization": `Bearer ${user.token}`
               }

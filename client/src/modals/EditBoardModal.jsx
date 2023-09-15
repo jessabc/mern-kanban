@@ -42,7 +42,7 @@ export default function EditBoardModal({setIsEditBoardModalVisible, isEditBoardM
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.put(`http://localhost:4000/api/boards/${currentBoardData._id}`, data,  { 
+            const response = await axios.put(`https://mern-kanban-backend.onrender.com/api/boards/${currentBoardData._id}`, data,  { 
               headers: { 
                 "Authorization": `Bearer ${user.token}`
               }

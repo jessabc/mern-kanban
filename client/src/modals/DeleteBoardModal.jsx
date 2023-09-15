@@ -16,7 +16,7 @@ export default function DeleteBoardModal({isDeleteBoardModalVisible, setIsDelete
     
   const deleteBoard = async() => {
     try {
-        const response = await axios.delete(`http://localhost:4000/api/boards/${currentBoardData._id} `,  { 
+        const response = await axios.delete(`https://mern-kanban-backend.onrender.com/api/boards/${currentBoardData._id} `,  { 
           headers: { 
             "Authorization": `Bearer ${user.token}`
           }

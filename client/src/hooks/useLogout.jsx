@@ -1,14 +1,18 @@
 import useAuthContext from './useAuthContext'
-
+import {Context} from '../Context'
+import { useContext } from 'react'
 
 const useLogout = () => {
 
     const {dispatch: authDispatch} = useAuthContext()
-    // const {dispatch: notesDispatch} = useNotesContext()
+
+    const {boards, setBoards, currentBoardName, setCurrentBoardName, currentBoardData, setCurrentBoardData, theme, setTheme} = useContext(Context)
 
     const logout = () => {
       authDispatch({type: 'LOGOUT'})
-      // notesDispatch({type: 'SET_NOTES', payload: null})
+      setBoards(null)
+      setCurrentBoardName('')
+      setCurrentBoardData({})
       localStorage.removeItem('user');
     }
 

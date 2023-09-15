@@ -52,7 +52,7 @@ export default function TaskModal({setIsTaskModalVisible, isTaskModalVisible, ta
 
   const onSubmit = async (data)  => {
     try {
-     const response = await axios.put(`http://localhost:4000/api/boards/tasks/subtasks/${currentBoardData._id}`, {...data, _id: task._id, originalStatus: task.status, task}, { 
+     const response = await axios.put(`https://mern-kanban-backend.onrender.com/api/boards/tasks/subtasks/${currentBoardData._id}`, {...data, _id: task._id, originalStatus: task.status, task}, { 
        headers: { 
          "Authorization": `Bearer ${user.token}`
        }

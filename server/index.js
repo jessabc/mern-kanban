@@ -8,7 +8,7 @@ import { router as userRoutes } from './routes/user.js'
 const app = express()
 
 const corsOptions = {
-    origin: "http://localhost:5173"
+    origin: "https://mern-kanban.onrender.com"
 }
 
 app.use(express.json())

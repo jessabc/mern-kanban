@@ -9,7 +9,7 @@ const useSignup = () => {
 
     const signup = async (email, password) => {
         try {
-            const response = await axios.post('http://localhost:4000/api/user/signup', {email, password})
+            const response = await axios.post('https://mern-kanban-backend.onrender.com/api/user/signup', {email, password})
             dispatch({type: 'LOGIN', payload: response.data})
             localStorage.setItem('user', JSON.stringify(response.data))
         }catch(error) {

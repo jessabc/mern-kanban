@@ -1,23 +1,26 @@
-import { useState } from 'react'
-import axios from 'axios'
-import useAuthContext from './useAuthContext'
+import { useState } from "react";
+import axios from "axios";
+import useAuthContext from "./useAuthContext";
 
-const useSignup = () => { 
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
-    const { dispatch} = useAuthContext()
+const useSignup = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { dispatch } = useAuthContext();
 
-    const signup = async (email, password) => {
-        try {
-            const response = await axios.post('https://mern-kanban-backend.onrender.com/api/user/signup', {email, password})
-            dispatch({type: 'LOGIN', payload: response.data})
-            localStorage.setItem('user', JSON.stringify(response.data))
-        }catch(error) {
-            setError(error.response.data.error)
-        }
+  const signup = async (email, password) => {
+    try {
+      const response = await axios.post(
+        "${import.meta.env.BACKEND_URL}/api/user/signup",
+        { email, password }
+      );
+      dispatch({ type: "LOGIN", payload: response.data });
+      localStorage.setItem("user", JSON.stringify(response.data));
+    } catch (error) {
+      setError(error.response.data.error);
     }
+  };
 
-    return {loading, error, signup}
-}
+  return { loading, error, signup };
+};
 
-export default useSignup
+export default useSignup;

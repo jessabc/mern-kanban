@@ -18,7 +18,7 @@ function Home() {
 
     const getBoards = async() => {
       try {
-        const response = await axios.get('https://mern-kanban-backend.onrender.com/api/boards', { 
+        const response = await axios.get(import.meta.env.BACKEND_URL, { 
           headers: { 
             "Authorization": `Bearer ${user.token}`
           }

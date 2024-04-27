@@ -111,7 +111,7 @@ export default function EditTaskModal({
       >
         <button
           onClick={handleClick}
-          className="ml-auto text-2xl bg-gray-200 p-2 rounded-md mt-1 mr-1"
+          className="ml-auto text-2xl bg-gray-200 p-2 rounded-md mt-4 mr-4"
         >
           <img src={iconCross} alt="cross icon to close modal" />
         </button>

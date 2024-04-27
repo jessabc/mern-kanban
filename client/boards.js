@@ -340,7 +340,6 @@
 //     "__v": 0
 //   }
 
-
 // {
 //   "boardName": "Marketing Plan",
 //   "columns": [
@@ -447,70 +446,5 @@
 //   ],
 //   "user_id": "64feb8cf70e5935b6ea0f532",
 //   "_id": "6502b675a0a7a0f086fa28b3",
-//   "__v": 0
-// }
-
-//  {
-//   "columns": [
-//     {
-//       "columnName": "Now",
-//       "tasks": [
-//         {
-//           "taskName": "Launch version one",
-//           "taskDescription": "",
-//           "status": "Now",
-//           "subtasks": [
-//             {
-//               "subtaskName": "Launch privately to our waitlist",
-//               "isCompleted": false,
-//               "_id": "6502b855a0a7a0f086fa29b6"
-//             },
-//             {
-//               "subtaskName": "Launch publicly on PH HN etc",
-//               "isCompleted": false,
-//               "_id": "6502b855a0a7a0f086fa29b7"
-//             }
-//           ],
-//           "_id": "6502b855a0a7a0f086fa29b5"
-//         },
-//         {
-//           "taskName": "Review early feedback and plan next steps for roadmap",
-//           "taskDescription": "Beyond the initial launch, we're keeping the initial roadmap completely empty. This meeting will help us plan out our next steps based on actual customer feedback.",
-//           "status": "Now",
-//           "subtasks": [
-//             {
-//               "subtaskName": "Interview 10 customers",
-//               "isCompleted": false,
-//               "_id": "6502b855a0a7a0f086fa29b9"
-//             },
-//             {
-//               "subtaskName": "Review common customer pain points and suggestions",
-//               "isCompleted": false,
-//               "_id": "6502b855a0a7a0f086fa29ba"
-//             },
-//             {
-//               "subtaskName": "Outline next steps for our roadmap",
-//               "isCompleted": false,
-//               "_id": "6502b855a0a7a0f086fa29bb"
-//             }
-//           ],
-//           "_id": "6502b855a0a7a0f086fa29b8"
-//         }
-//       ],
-//       "_id": "6502b855a0a7a0f086fa29b4"
-//     },
-//     {
-//       "columnName": "Next",
-//       "tasks": [],
-//       "_id": "6502b855a0a7a0f086fa29bc"
-//     },
-//     {
-//       "columnName": "Later",
-//       "tasks": [],
-//       "_id": "6502b855a0a7a0f086fa29bd"
-//     }
-//   ],
-//   "user_id": "64fec9d575bea96f6d982de5",
-//   "_id": "6502b855a0a7a0f086fa29b3",
 //   "__v": 0
 // }

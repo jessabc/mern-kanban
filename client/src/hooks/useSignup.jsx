@@ -10,7 +10,7 @@ const useSignup = () => {
   const signup = async (email, password) => {
     try {
       const response = await axios.post(
-        "${import.meta.env.BACKEND_URL}/api/user/signup",
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/signup`,
         { email, password }
       );
       dispatch({ type: "LOGIN", payload: response.data });

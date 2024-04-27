@@ -17,6 +17,7 @@ export default function TaskModal({
   task,
   numCompletedSubtasks,
 }) {
+  // console.log(task);
   const [count, setCount] = useState(numCompletedSubtasks);
 
   const [isEditTaskModalVisible, setIsEditTaskModalVisible] = useState(false);
@@ -59,12 +60,17 @@ export default function TaskModal({
   });
 
   const onSubmit = async (data) => {
+    const updatedSubtasks = task.subtasks.map((subtask, index) => {
+      return { ...subtask, isCompleted: data.subtasks[index].isCompleted };
+    });
+    const updatedData = { ...data, subtasks: updatedSubtasks };
+    console.log(updatedData);
     try {
       const response = await axios.put(
-        `${import.meta.env.BACKEND_URL}/api/boards/tasks/subtasks/${
+        `${import.meta.env.VITE_BACKEND_URL}/api/boards/tasks/subtasks/${
           currentBoardData._id
         }`,
-        { ...data, _id: task._id, originalStatus: task.status, task },
+        { ...updatedData, _id: task._id, originalStatus: task.status, task },
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -103,12 +109,12 @@ export default function TaskModal({
           isTaskModalVisible
             ? "fixed top-0 left-0 w-screen h-screen bg-opacity-50 bg-gray-600  flex items-start justify-center dark:bg-gray-900 dark:bg-opacity-50"
             : ""
-        }`}
+        } flex flex-col items-center justify-center`}
       >
         <div
           className={`${
             isTaskModalVisible
-              ? "w-3/4 sm:w-1/2  h-screen bg-gray-50 shadow-md rounded-lg text-sm text-gray-400"
+              ? "w-3/4 sm:w-1/2  bg-gray-50 shadow-md rounded-lg text-sm text-gray-400"
               : "hidden"
           } flex flex-col  overflow-y-auto dark:bg-zinc-700`}
           ref={ref}
@@ -132,11 +138,7 @@ export default function TaskModal({
 
                 {/* edit/delete task button -*/}
                 <div className="ml-auto">
-                  <div
-                    onClick={() =>
-                      setIsEditDeleteTaskModalVisible((prev) => !prev)
-                    }
-                  >
+                  <div onClick={() => setIsEditDeleteTaskModalVisible(true)}>
                     <img
                       src={iconVerticalEllipsis}
                       alt="vertical ellipsis"
@@ -161,7 +163,7 @@ export default function TaskModal({
               </div>
 
               <p className="mb-3">
-                {task.description ? task.description : "No description"}
+                {task.taskDescription ? task.taskDescription : "No description"}
               </p>
 
               <p className="text-gray-600 font-semibold mb-3">
@@ -170,10 +172,10 @@ export default function TaskModal({
 
               {/* subtasks */}
               <ul>
-                {fields.map((subtask, index) => {
+                {task.subtasks.map((subtask, index) => {
                   return (
                     <li
-                      key={subtask.id}
+                      key={subtask.title}
                       className="flex items-center my-3 bg-gray-200 py-2 rounded-lg pl-2"
                     >
                       <input

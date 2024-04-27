@@ -51,7 +51,7 @@ export default function CreateNewBoardModal({
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        "${import.meta.env.BACKEND_URL}/api/boards",
+        `${import.meta.env.VITE_BACKEND_URL}/api/boards`,
         data,
         {
           headers: {
@@ -79,12 +79,12 @@ export default function CreateNewBoardModal({
           isCreateNewBoardModalVisible
             ? "fixed top-0 left-0 w-screen h-screen bg-opacity-50 bg-gray-600  flex items-start justify-center dark:bg-gray-900 dark:bg-opacity-50"
             : ""
-        }`}
+        } flex flex-col items-center justify-center`}
       >
         <div
           className={`${
             isCreateNewBoardModalVisible
-              ? "w-3/4 sm:w-1/2 h-screen bg-gray-50 shadow-md    rounded-lg text-sm text-gray-400"
+              ? "w-3/4 sm:w-1/2 bg-gray-50 shadow-md    rounded-lg text-sm text-gray-400"
               : "hidden"
           } flex flex-col dark:bg-zinc-700`}
           ref={ref}

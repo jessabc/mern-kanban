@@ -31,29 +31,29 @@ export default function DeleteTaskModal({
   } = useContext(Context);
 
   const handleClick = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.put(
-        `${import.meta.env.BACKEND_URL}/api/boards/tasks/delete/${
-          currentBoardData._id
-        }`,
-        { colName: task.status, taskId: task._id },
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      setCurrentBoardData(response.data);
-      setBoards((prev) =>
-        prev.map((board) =>
-          board.boardName === response.data.boardName ? response.data : board
-        )
-      );
-    } catch (error) {
-      console.log(error);
+    if (e.target.id === "delete") {
+      try {
+        const response = await axios.put(
+          `${import.meta.env.VITE_BACKEND_URL}/api/boards/tasks/delete/${
+            currentBoardData._id
+          }`,
+          { colName: task.status, taskId: task._id },
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
+        setCurrentBoardData(response.data);
+        setBoards((prev) =>
+          prev.map((board) =>
+            board.boardName === response.data.boardName ? response.data : board
+          )
+        );
+      } catch (error) {
+        console.log(error);
+      }
     }
-
     setIsDeleteTaskModalVisible(false);
     setIsTaskModalVisible(false);
   };
@@ -66,12 +66,12 @@ export default function DeleteTaskModal({
           isDeleteTaskModalVisible
             ? "fixed top-0 left-0 w-screen h-screen bg-opacity-50 bg-gray-600 flex items-start justify-center dark:bg-gray-900 dark:bg-opacity-50"
             : ""
-        }`}
+        } flex flex-col items-center justify-center`}
       >
         <div
           className={`${
             isDeleteTaskModalVisible
-              ? "w-3/4 sm:w-1/2 h-screen bg-gray-50 shadow-md    rounded-lg text-sm text-gray-400"
+              ? "w-3/4 sm:w-1/2 bg-gray-50 shadow-md    rounded-lg text-sm text-gray-400"
               : "hidden"
           } flex flex-col overflow-y-auto dark:bg-zinc-700`}
           ref={ref}

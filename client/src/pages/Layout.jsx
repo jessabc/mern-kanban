@@ -7,8 +7,8 @@ const Layout = () => {
   let location = useLocation();
   return (
     <div className=" text-slate-900 ">
-      {(!location.pathname === "/login" ||
-        !location.pathname === "/signup") && (
+      {location.pathname.includes("login") ||
+      location.pathname.includes("signup") ? null : (
         <div className="flex dark:bg-zinc-800 dark:text-zinc-100 ">
           <User />
         </div>

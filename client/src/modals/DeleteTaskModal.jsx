@@ -31,29 +31,28 @@ export default function DeleteTaskModal({
   } = useContext(Context);
 
   const handleClick = async (e) => {
-    if (e.target.id === "delete") {
-      try {
-        const response = await axios.put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/boards/tasks/delete/${
-            currentBoardData._id
-          }`,
-          { colName: task.status, taskId: task._id },
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-        setCurrentBoardData(response.data);
-        setBoards((prev) =>
-          prev.map((board) =>
-            board.boardName === response.data.boardName ? response.data : board
-          )
-        );
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/boards/tasks/delete/${
+          currentBoardData._id
+        }`,
+        { colName: task.status, taskId: task._id },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setCurrentBoardData(response.data);
+      setBoards((prev) =>
+        prev.map((board) =>
+          board.boardName === response.data.boardName ? response.data : board
+        )
+      );
+    } catch (error) {
+      console.log(error);
     }
+
     setIsDeleteTaskModalVisible(false);
     setIsTaskModalVisible(false);
   };
@@ -79,7 +78,7 @@ export default function DeleteTaskModal({
           <button
             type="button"
             id="exit"
-            onClick={(e) => handleClick(e)}
+            onClick={() => setIsDeleteTaskModalVisible(false)}
             className="ml-auto text-2xl bg-gray-200 p-2 rounded-md mt-4 mr-4"
           >
             <img src={iconCross} alt="cross icon to close modal" />
@@ -98,7 +97,7 @@ export default function DeleteTaskModal({
               <button
                 type="button"
                 id="delete"
-                onClick={(e) => handleClick(e)}
+                onClick={handleClick}
                 className="bg-red-400 text-white rounded-full py-2 w-1/2"
               >
                 Delete
@@ -106,7 +105,7 @@ export default function DeleteTaskModal({
               <button
                 type="button"
                 id="cancel"
-                onClick={(e) => handleClick(e)}
+                onClick={() => setIsDeleteTaskModalVisible(false)}
                 className="text-indigo-500 bg-gray-200 rounded-full py-2  font-semibold w-1/2"
               >
                 Cancel

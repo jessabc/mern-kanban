@@ -64,7 +64,6 @@ export default function TaskModal({
       return { ...subtask, isCompleted: data.subtasks[index].isCompleted };
     });
     const updatedData = { ...data, subtasks: updatedSubtasks };
-    console.log(updatedData);
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_BACKEND_URL}/api/boards/tasks/subtasks/${

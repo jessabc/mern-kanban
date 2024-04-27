@@ -174,7 +174,7 @@ export default function EditTaskModal({
               <select
                 id="status"
                 {...register("status")}
-                className="border-2 border-solid border-gray-300 rounded-sm py-1 my-1 pl-2 outline-none focus:border-indigo-500 mb-2"
+                className="border-2 border-solid border-gray-300 rounded-sm py-1 my-1 pl-2 outline-none focus:border-indigo-500 mb-2 text-gray-900"
                 // defaultValue={task.status}
               >
                 {statusOptionElements}

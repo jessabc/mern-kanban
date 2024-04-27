@@ -136,28 +136,30 @@ export default function TaskModal({
                 </p>
 
                 {/* edit/delete task button -*/}
-                <div className="ml-auto">
+                <div className="ml-auto relative">
                   <div onClick={() => setIsEditDeleteTaskModalVisible(true)}>
                     <img
                       src={iconVerticalEllipsis}
                       alt="vertical ellipsis"
-                      className="cursor-pointer"
+                      className="cursor-pointer "
                     />
                   </div>
-                </div>
 
-                {/* edit/delete task modal */}
-                <div>
-                  <EditOrDeleteTaskModal
-                    task={task}
-                    isEditDeleteTaskModalVisible={isEditDeleteTaskModalVisible}
-                    setIsEditDeleteTaskModalVisible={
-                      setIsEditDeleteTaskModalVisible
-                    }
-                    setIsTaskModalVisible={setIsTaskModalVisible}
-                    isTaskModalVisible={isTaskModalVisible}
-                    setIsEditTaskModalVisible={setIsEditTaskModalVisible}
-                  />
+                  {/* edit/delete task modal */}
+                  <div className="">
+                    <EditOrDeleteTaskModal
+                      task={task}
+                      isEditDeleteTaskModalVisible={
+                        isEditDeleteTaskModalVisible
+                      }
+                      setIsEditDeleteTaskModalVisible={
+                        setIsEditDeleteTaskModalVisible
+                      }
+                      setIsTaskModalVisible={setIsTaskModalVisible}
+                      isTaskModalVisible={isTaskModalVisible}
+                      setIsEditTaskModalVisible={setIsEditTaskModalVisible}
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -206,7 +208,7 @@ export default function TaskModal({
                 <select
                   id="status"
                   {...register("status")}
-                  className="border-2 border-solid border-gray-300 rounded-sm py-1 my-1  pl-2 outline-none focus:border-indigo-500 mb-2"
+                  className="border-2 border-solid border-gray-300 rounded-sm py-1 my-1  pl-2 outline-none focus:border-indigo-500 mb-2 text-gray-900"
                   // defaultValue={task.status}
                 >
                   {statusOptionElements}

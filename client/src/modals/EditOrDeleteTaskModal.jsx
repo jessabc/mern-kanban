@@ -31,19 +31,13 @@ export default function EditOrDeleteTaskModal({
     <>
       <div className="">
         {/* overlay */}
-        <div
-          className={`${
-            isEditDeleteTaskModalVisible
-              ? "fixed top-0 left-0 w-screen h-screen bg-opacity-50 bg-gray-600  flex items-start justify-center dark:bg-gray-900 dark:bg-opacity-50"
-              : ""
-          }`}
-        >
+        <div className={`${isEditDeleteTaskModalVisible ? " " : ""}`}>
           <div
             className={`${
               isEditDeleteTaskModalVisible
-                ? "flex flex-col absolute  w-fit py-5 pl-5 pr-10  text-lg bg-gray-50 shadow-md gap-1 rounded-lg text-gray-400 dark:bg-zinc-700"
+                ? "flex flex-col absolute right-4 w-28 justify-center items-start py-3 pl-3  text-lg bg-gray-50 shadow-lg gap-1 rounded-lg text-gray-400 dark:bg-zinc-700"
                 : "hidden"
-            }`}
+            } `}
             ref={ref}
           >
             <button

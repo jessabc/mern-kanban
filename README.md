@@ -42,7 +42,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Github](https://github.com/jessabc/mern-kanban)
-- Live Site URL: [Kanban Task Management](https://mern-kanban.onrender.com)
+- Live Site URL: 
 
 
 ## My process
